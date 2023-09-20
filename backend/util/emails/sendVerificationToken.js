@@ -21,8 +21,10 @@ const sendVerificationEmail = (to, verificationLink) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
+            console.log("error sending verification", error);
             return "failed to send verification";
         } else {
+            console.log("successfully sending verification");
             return "successfully sent verification";
         }
     });
