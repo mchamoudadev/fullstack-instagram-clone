@@ -7,9 +7,8 @@ const commentSchema = new Schema({
     content: {
         type: String,
         required: true,
-        validate: [value => value.length <= 10, 'content should be at least 10 characters']
+        // validate: [value => value.length <= 10, 'content should be at least 10 characters']
     },
-
     post: {
         type: Schema.Types.ObjectId,
         ref: "Post",
@@ -19,8 +18,7 @@ const commentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true
-    }
-
+    },
 }, {
     timestamps: true,
 });
