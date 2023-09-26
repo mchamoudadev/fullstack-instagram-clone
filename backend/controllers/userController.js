@@ -141,18 +141,21 @@ export const loginUser = async (req, res) => {
         if (!validPassword) {
             return res.status(400).send("Invalid username or password");
         }
+        // const expireIn = 7 * 24 * 60 * 60;
+        const expiresIn = 2 * 60;
 
-        const token = jwt.sign({ _id: isUserExists._id }, JWT_SECRET_KEY);
+
+        const token = jwt.sign({ _id: isUserExists._id }, JWT_SECRET_KEY, { expiresIn });
 
         res.cookie("token", token, {
             httpOnly: true,
             secure: false,
-            maxAge: 7 * 24 * 60 * 60 * 1000
+            maxAge: expiresIn * 1000
         });
 
         isUserExists.password = undefined;
 
-        res.status(200).send(isUserExists);
+        res.status(200).send({ ...isUserExists.toJSON(), expiresIn });
 
     } catch (err) {
         console.log("first login failed", err);

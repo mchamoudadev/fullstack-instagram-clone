@@ -122,6 +122,34 @@ export const getAllPosts = async (req, res) => {
     }
 };
 
+export const getPostById = async (req, res, next) => {
+    try {
+        const post = await Post.findById(req.params.id)
+            .populate({
+                path: 'comments',
+                model: 'Comment',
+                populate: {
+                    path: 'author',
+                    model: 'User'
+                }
+            })
+            .populate({
+                path: 'likes',
+                model: 'Like',
+                populate: {
+                    path: 'user',
+                    model: 'User'
+                }
+            });
+
+        if (!post) return next(new Error('Post not found'));
+        // res.clearCookie('token');
+        res.status(200).json(post);
+    } catch (error) {
+        next(error);
+    }
+};
+
 export const LikePost = async (req, res) => {
 
     try {
