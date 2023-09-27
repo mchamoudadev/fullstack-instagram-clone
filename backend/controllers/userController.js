@@ -141,8 +141,8 @@ export const loginUser = async (req, res) => {
         if (!validPassword) {
             return res.status(400).send("Invalid username or password");
         }
-        // const expireIn = 7 * 24 * 60 * 60;
-        const expiresIn = 2 * 60;
+        const expiresIn = 7 * 24 * 60 * 60;
+        // const expiresIn = 2 * 60;
 
 
         const token = jwt.sign({ _id: isUserExists._id }, JWT_SECRET_KEY, { expiresIn });
@@ -162,6 +162,18 @@ export const loginUser = async (req, res) => {
         res.status(400).send(err.message);
     }
 
-}
+};
 
+export const logoutUser = (req, res) => {
 
+    try {
+
+        res.clearCookie("token");
+
+        res.send("Logout successfully");
+
+    } catch (error) {
+        console.log("error on logout", error);
+    }
+
+};

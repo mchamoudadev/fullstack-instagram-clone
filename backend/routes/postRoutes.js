@@ -11,7 +11,7 @@ postRouter.post('/create-post', authenticate, upload.single('image'), createPost
 postRouter.post('/update-post/:id', authenticate, upload.single('image'), updatePost);
 postRouter.get('/get-posts', getAllPosts);
 postRouter.get('/get-post/:id', authenticate, getPostById);
-postRouter.get('/like-post/:id', authenticate, LikePost);
+postRouter.post('/like-post/:id', authenticate, LikePost);
 postRouter.post('/comment-post/:id', authenticate, commentOnPost);
 postRouter.delete('/delete-post/:id', authenticate, deletePost);
 

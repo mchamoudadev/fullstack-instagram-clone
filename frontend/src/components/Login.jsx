@@ -34,6 +34,7 @@ const Login = () => {
     if (!error) {
       console.log("succee");
       dispatch(setCredentials({ ...data }));
+      navigate("/");
     } else {
       console.log("cilad");
     }

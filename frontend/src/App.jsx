@@ -2,17 +2,18 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 
 import { Outlet } from "react-router-dom";
+import useAuthCheck from "./hooks/useCheckAuth";
 
 
 function App() {
 
+  useAuthCheck();
+
   return (
-  <>
-  <Header/>
-    <Outlet/>
-    <Footer/>
-  </>
-  )
+    <>
+      <Outlet />
+    </>
+  );
 }
 
-export default App
+export default App;
